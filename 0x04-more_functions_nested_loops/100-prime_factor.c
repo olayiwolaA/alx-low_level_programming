@@ -1,23 +1,30 @@
 #include <stdio.h>
-#include <math.h>
+
 /**
-* main - finds and prints the largest prime factor.
-*
-* Return: Always 0.
-*/
+ * main - prints the largest prime factor of the number
+ *
+ * Return: Always 0
+ */
+
 int main(void)
 {
+long int prime = 612852475143;
+long int quotient = prime;
+long int divisor = 2;
 
-unsigned long i, prime, n = 15;
-
-for (i = 3; i <= n; i += 2)
+while (quotient != divisor)
 {
-while (n % i == 0)
+if (quotient % divisor == 0)
 {
-prime = i;
-n = n / i;
+quotient = quotient / divisor;
+}
+else
+{
+divisor++;
 }
 }
-printf("%lu\n", prime);
+
+printf("%li\n", quotient);
+
 return (0);
 }
