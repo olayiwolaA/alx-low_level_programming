@@ -1,0 +1,24 @@
+#include "main.h"
+/**
+ * print_square - function that prints a square, followed by a new line.
+ * @size: variable int
+ * Return: Always 0.
+ */
+void print_square(int size)
+{
+ int s, e;
+if (size > 0)
+{
+for (s = 0; s < size; s++)
+{
+
+for (e = 0; e < size; e++)
+_putchar(35);
+
+_putchar('\n');
+}
+}
+
+else
+_putchar('\n');
+}
