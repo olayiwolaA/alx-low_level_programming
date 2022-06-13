@@ -1,4 +1,3 @@
-#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -9,20 +8,18 @@
  */
 int main(void)
 {
-char find[53] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-char password[22];
-int s, e, crack, me;
+int r = 0, c = 0;
+time_t t;
 
-srand(time(0));
-
-for (s = 0; crack < 2772; s++)
+srand((unsigned int) time(&t));
+while (c < 2772)
 {
-e = rand() % 10;
-password[s] = find[e];
-crack += password[s];
+r = rand() % 128;
+if ((c + r) > 2772)
+break;
+c = c + r;
+printf("%c", r);
 }
-me = 2772 - crack;
-password[s] = me;
-printf("%s\n",  password);
+printf("%c\n", (2772 - c));
 return (0);
 }
