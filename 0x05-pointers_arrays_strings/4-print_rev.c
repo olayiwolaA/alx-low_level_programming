@@ -2,7 +2,7 @@
 #include <stdio.h>
 /**
  * print_rev - prints a string, in reverse.
- * @s: pointer int type
+ * @se: pointer int type
  * Return: Always 0.
  */
 void print_rev(char *se)
