@@ -1,11 +1,11 @@
-#0x05. C - Pointers, arrays and strings
+# 0x05. C - Pointers, arrays and strings
 ## Learning Objectives
 At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
-*What are pointers and how to use them
-*What are arrays and how to use them
-*What are the differences between pointers and arrays
-*How to use strings and how to manipulate them
-*Scope of variables
+* What are pointers and how to use them
+* What are arrays and how to use them
+* What are the differences between pointers and arrays
+* How to use strings and how to manipulate them
+* Scope of variables
 ## Tasks
 ### 0. 98 Battery st.
 * Write a function that takes a pointer to an int as parameter and updates the value it points to to 98.
@@ -27,4 +27,4 @@ At the end of this project, you are expected to be able to explain to anyone, wi
 * Write a function that prints n elements of an array of integers, followed by a new line.
 ### 9. strcpy.
 * Write a function that copies the string pointed to by src, including the terminating null byte (\0), to the buffer pointed to by dest.
-*Return value: the pointer to dest
+* Return value: the pointer to dest
