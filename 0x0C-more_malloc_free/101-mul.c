@@ -1,135 +1,99 @@
 #include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
-
+#include <stdio.h>
 /**
- * adding_all_mul - sum all the addition to know the multiplication result
- * @a: number 1
- * @len_a: lenght of number 1
- * @b: number 2
- * @len_b: lenght of number 2
- * Return: Addition pointer to the total resul of the  multiplication
+ * is_digit - checks if a string contains a non-digit char
+ * @s: string to be evaluated
+ *
+ * Return: 0 if a non-digit is found, 1 otherwise
  */
-add_t *adding_all_mul(char *a, int len_a, char *b, int len_b)
+int is_digit(char *s)
 {
-add_t *result = NULL;
-int i = 0, j = 0, carry = 0;
+	int i = 0;
 
-result = malloc(sizeof(add_t));
-
-result->next = NULL, result->n_dig = 0, result->len_r = len_a + len_b;
-
-result->n_add = malloc(sizeof(char) * result->len_r);
-
-for (i = 0; i < result->len_r; i++)
-result->n_add[i] = '0';
-
-for (i = len_a - 1; i >= 0; i--)
-{
-carry = 0;
-for (j = len_b - 1; j >= 0; j--)
-{
-carry += (a[i] - '0') * (b[j] - '0');
-carry += result->n_add[i + j + 1] - '0';
-
-result->n_add[i + j + 1] = (carry % 10) + '0';
-carry /= 10;
-}
-if (carry)
-result->n_add[i + j + 1] = (carry % 10) + '0';
-}
-if (result->n_add[0] != '0')
-result->n_dig = len_a + len_b;
-else
-result->n_dig = len_a + len_b - 1;
-
-return (result);
+	while (s[i])
+	{
+		if (s[i] < '0' || s[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 /**
- * print_free_result - print the result of the multiplication and free all
- * @result: Addition pointer to the total resul of the  multiplication
- * Result: Nothing
+ * _strlen - returns the length of a string
+ * @s: string to evaluate
+ *
+ * Return: the length of the string
  */
-void print_free_result(add_t *result)
+int _strlen(char *s)
 {
-int i = 0, start_n = 0;
+	int i = 0;
 
-i = 0;
-while (i < result->n_dig)
-{
-if (start_n || result->n_add[result->len_r - result->n_dig + i] != '0')
-{
-_putchar(result->n_add[result->len_r - result->n_dig + i]);
-start_n = 1;
-}
-i++;
-}
-if (!result->n_dig || !start_n)
-_putchar('0');
-_putchar('\n');
-free(result->n_add);
-free(result);
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
 }
 
 /**
- * error_message - print an error message and exit with status 98
- * Return: Nothing
+ * errors - handles errors for main
  */
-void error_message(void)
+void errors(void)
 {
-char error_msg[] = "Error";
-int i = 0;
-
-while (error_msg[i] != '\0')
-{
-_putchar(error_msg[i]);
-i++;
-}
-
-_putchar('\n');
-
-exit(98);
+	printf("Error\n");
+	exit(98);
 }
 
 /**
- * main - multiply 2 long numbers
- * usage <> ./mul num1 num2
- * @ac: number of arguments
- * @av: list of arguments
- * Return: 0 on success, another number otherwise
+ * main - multiplies two positive numbers
+ * @argc: number of arguments
+ * @argv: array of arguments
+ *
+ * Return: always 0 (Success)
  */
-int main(int ac, char **av)
+int main(int argc, char *argv[])
 {
-char *a = NULL, *b =  NULL;
-int i = 0, len_a = 0, len_b = 0, is_a = 1, is_b = 1, len_r = 0;
-add_t *result = NULL;
+	char *s1, *s2;
+	int len1, len2, len, i, carry, digit1, digit2, *result, a = 0;
 
-if (ac != 3)
-error_message();
-
-for (i = 0, a = av[1], b = av[2]; is_a == 1 || is_b == 1; i++)
-{
-if (is_a == 1 && a[i] == '\0')
-is_a = 0, len_a = i;
-if (is_b == 1 && b[i] == '\0')
-is_b = 0, len_b = i;
-if ((is_a == 1 && (a[i] < '0' || a[i] > '9')) ||
-(is_b == 1 && (b[i] < '0' || b[i] > '9')))
-error_message();
-}
-
-if (len_a == 0 || len_b == 0)
-error_message();
-
-len_r = len_a + len_b;
-if (len_a > len_b)
-a = av[2], b = av[1], len_a = len_b, len_b = len_r - len_b;
-
-result = adding_all_mul(a, len_a, b, len_b);
-
-print_free_result(result);
-
-return (0);
+	s1 = argv[1], s2 = argv[2];
+	if (argc != 3 || !is_digit(s1) || !is_digit(s2))
+		errors();
+	len1 = _strlen(s1);
+	len2 = _strlen(s2);
+	len = len1 + len2 + 1;
+	result = malloc(sizeof(int) * len);
+	if (!result)
+		return (1);
+	for (i = 0; i <= len1 + len2; i++)
+		result[i] = 0;
+	for (len1 = len1 - 1; len1 >= 0; len1--)
+	{
+		digit1 = s1[len1] - '0';
+		carry = 0;
+		for (len2 = _strlen(s2) - 1; len2 >= 0; len2--)
+		{
+			digit2 = s2[len2] - '0';
+			carry += result[len1 + len2 + 1] + (digit1 * digit2);
+			result[len1 + len2 + 1] = carry % 10;
+			carry /= 10;
+		}
+		if (carry > 0)
+			result[len1 + len2 + 1] += carry;
+	}
+	for (i = 0; i < len - 1; i++)
+	{
+		if (result[i])
+			a = 1;
+		if (a)
+			_putchar(result[i] + '0');
+	}
+	if (!a)
+		_putchar('0');
+	_putchar('\n');
+	free(result);
+	return (0);
 }
 
