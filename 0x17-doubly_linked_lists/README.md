@@ -1,5 +1,5 @@
-g 0x17. C - Doubly linked lists
-## Learning Objectives
+# 0x17. C - Doubly linked lists
+## :open_book: Learning Objectives
 At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
 * What is a doubly linked list
 * How to use doubly linked lists
