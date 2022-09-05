@@ -1,5 +1,5 @@
-#ifndef MAIN_HEADER
-#define MAIN_HEADER
+#ifndef _MAIN_HEADER_
+#define _MAIN_HEADER_
 
 int _putchar(char c);
 int _islower(int c);
